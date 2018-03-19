@@ -9,16 +9,18 @@ var totalBottles = 0;
 var recycle = 0;
 var restCountBottles = 0;
 var restCountCaps = 0;
+var bottlesRecycled = 0;
+var capsRecycled = 0;
 
 function bottlesBack(invested) {
     while (bottleStart >= 2 || capsCount >= 4){
-    
+    // not sure where to put the capsRecycled += to count the caps being recycleds
+
         var capsToRedeem = capsCount;  
         restCountCaps = capsToRedeem % capsPerBottle;
 
         var capsAbleToRedeem = capsToRedeem - restCountCaps;
         var bottlesFromCaps = capsAbleToRedeem / capsPerBottle;
-        // console.log("bottlesFromCaps: ", bottlesFromCaps);
 
         restCountBottles += bottlesFromCaps;
 
@@ -26,15 +28,14 @@ function bottlesBack(invested) {
         restCountBottles = bottlesToRedeem % bottlesPerBottle;
         bottlesToRedeem = bottlesToRedeem - restCountBottles;
 
-
         recycle = bottlesToRedeem / bottlesPerBottle;
-        // console.log("Recycle: ", recycle);
         totalBottles += recycle + bottlesFromCaps;
+        bottlesRecycled += recycle;
         bottleStart = bottleStart - bottlesToRedeem + recycle + bottlesFromCaps;
         capsCount = capsCount - capsAbleToRedeem + bottlesFromCaps + recycle;
     }
-    // console.log(restCountBottles);
-    console.log("Total bottles: ", totalBottles + (invested / popCost));
+    // console.log(capsRecycled); // Cannot figure out how to get the caps Recycled!!
+    console.log("TOTAL BOTTLES: ", totalBottles + (invested / popCost) + "\n" + "REMAINING BOTTLES: " + bottleStart +"\n" + "REMAINING CAPS: " + capsCount + "\n" + "TOTAL EARNED: \n   BOTTLES: " + bottlesRecycled + "\n" + "   CAPS: " + capsRecycled);
 }
 
 bottlesBack(invested);
