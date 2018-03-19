@@ -1,4 +1,4 @@
-var invested = 40;
+var invested = process.argv.slice(2);
 
 var popCost = 2;
 var capsPerBottle = 4;
