@@ -1,31 +1,25 @@
-var invested = 10;
+var invested = 22;
 
 var popCost = 2;
-var bottlesPerCap = 0.25;
-var bottlesPerBottle = 0.5;
+var capsPerBottle = 4;
+var bottlesPerBottle = 2;
 var bottleStart = invested / popCost; // 5
-var capsCount = invested / popCost;
+var capsCount = invested / popCost;  // 5
 var totalBottles = 0;
+var recycle = 0;
+var restCountBottles = 0;
 
 function bottlesBack(invested) {
-    var restCountBottles = bottleStart % 2;  // 1
-    var redeemedBottles = bottleStart - restCountBottles;  // 4
-    var recycle = redeemedBottles * bottlesPerBottle;  // 2
-    capsCount += recycle;
-    totalBottles += recycle + bottleStart;
-
-    var newCount = recycle + restCountBottles;
-
-    console.log(newCount);
-    console.log(capsCount);
-
-
-    
-
-
-
-
-    console.log("Total bottles: " + totalBottles);
+    while (bottleStart >= 2){
+        var bottlesToRedeem = bottleStart + restCountBottles;
+        restCountBottles = bottlesToRedeem % bottlesPerBottle;
+        var i2 = bottlesToRedeem - restCountBottles;
+        recycle = i2 / bottlesPerBottle;
+        totalBottles += recycle;
+        bottleStart = bottleStart - i2 + recycle;
+    }
+    console.log(restCountBottles);
+    console.log("Total bottles: ", totalBottles + (invested / popCost));
 }
 
 bottlesBack(invested);
